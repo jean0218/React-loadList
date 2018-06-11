@@ -1,0 +1,24 @@
+/*-------------------------------------------------------------------------------------------------------------------
+底部信息弹出框
+-------------------------------------------------------------------------------------------------------------------*/
+.message-tip-wrap{
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  position:fixed;
+  bottom: 3rem;
+  width: 100%;
+  z-index: 1099;
+  left: 0;
+  right: 0;
+}
+.message-tip{
+  background: rgba(0,0,0,.4);
+  color: #fff;
+  border-radius:.5rem;
+  padding: .6rem 2rem;
+  font-size: 1.4rem;
+}
