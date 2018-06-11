@@ -1,2 +1,2 @@
 # React-loadList
-  移动端列表加载组件
+  基于React实现的移动端列表加载组件
