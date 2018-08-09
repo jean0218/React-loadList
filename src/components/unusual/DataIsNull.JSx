@@ -13,7 +13,7 @@ export default function DataIsNull(props){
     return (
         <div className = {className}>
             <img 
-                src = {require('images/ucardUI/data_isNull.png')} 
+                src = {require('../../images/data_isNull.png')} 
                 width = "100%"
             />           
             <p>{errorMsg}</p>

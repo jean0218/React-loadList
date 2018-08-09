@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './baseLine.css';
 
 
-export default function Loading(props){  
+export default function BaseLine(props){  
     return (
         <div className={props.className}>
             <div className="baseline"></div>

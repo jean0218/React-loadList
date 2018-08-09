@@ -1,14 +1,3 @@
-/*---------------------------------------------------------
-@ 创建时间：20170822
-@ 创 建 者：lunjiao.peng
-@ 版本：与redux搭配使用
-@ 功能描述：列表组件，上拉刷新，下拉翻页
-@ param
----------------------------------------------------------
-@ 修 改 者：lunjiao.peng
-@ 修改时间：20171128
-@ 修 改 点：抽取上滑下滑事件
----------------------------------------------------------*/
 import React, { Component } from 'react';
 import Pagination from './Pagination';
 import BaseLine from './BaseLine';
@@ -52,20 +41,12 @@ export default class LoadListSuccess extends Component{
     renderDataList(){       
         var listIndex,
             self = this;
-        const { children, itemKeyName } = this.props;
+        const { children, itemKeyName, dataSource, renderItem } = this.props;
+        const { onChange } = this;
         let itemKey;
-        return this.props.list.map(function(item, listIndex, array) {
+        return dataSource.map(function(item, listIndex, array) {
             itemKey = item[itemKeyName] ? item[itemKeyName] : listIndex;
-            return React.Children.map(children, (child, index) =>{
-                if(!child){return;}
-                return React.cloneElement(child, {
-                    item,
-                    onChange:self.handleChange,
-                    index:listIndex,
-                    array,
-                    key:itemKey,
-                });
-            });
+            return renderItem(item, onChange, listIndex, array, itemKey);
         });
     }    
    
@@ -101,19 +82,20 @@ export default class LoadListSuccess extends Component{
     renderBaseLine(){
         const { endPage } = this.props;
         if(endPage){
+            renderPageEnd && renderPageEnd;
             return (
-                <BaseLine className = {this.props.baselineClassName}/>
+                <BaseLine className = 'datalist-baseline'/>
             )
         }
         return null;
     }
     
     render() {
-        const { listClassName, isFirstLoading, list, currentPage, isLoading, stopFlip, endPage } = this.props;
+        const { className, currentPage, stopFlip, endPage } = this.props;
         const stopPageDown = stopFlip || endPage;
         return (
             <Pagination
-                className = {listClassName} 
+                className = {className} 
                 currentPage = {currentPage}
                 onPageUp = {this.handlePageUp} 
                 onPageDown = {this.handlePageDown} 

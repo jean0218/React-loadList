@@ -10,7 +10,7 @@ export default class NoNetwork extends Component{
         return (
             <div className = {"no-network " + this.props.className}>
                 <img 
-                    src = {require('images/ucardUI/no_network.png')} 
+                    src = {require('../../images/no_network.png')} 
                     width = "100%"
                 />           
                 <p>啊哦，您的网络似乎出现问题了</p>

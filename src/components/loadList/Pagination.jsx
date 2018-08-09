@@ -1,11 +1,5 @@
-/*---------------------------------------------------------
-@ 创建时间：20171128
-@ 创 建 者：lunjiao.peng
-@ 功能描述：组件分页事件捕获
-            包括向上翻页，向下翻页  
----------------------------------------------------------*/
 import React, { Component } from 'react';
-import { isAndroidClient } from '../platform';
+import { isAndroidClient } from '../../platform';
 
 let widowsObj = {
     pageHeight: 0,
