@@ -1,15 +1,9 @@
-/*---------------------------------------------------------
-@ 创建时间：20171228
-@ 创 建 者：lunjiao.peng
-@ 功能描述：loadList的容器组件
-@ param
----------------------------------------------------------*/
 import React, { Component } from 'react';
 import LoadList from './LoadList';
 import mergeList from './mergeList';
 
 
-export default class LoadListContainer extends Component{
+export default class LoadListGetData extends Component{
     static defaultProps = {
         dataFieldName:"",
     };
@@ -33,7 +27,7 @@ export default class LoadListContainer extends Component{
             stopFlip: true,
         });
         const that = this,
-            { requestPromise, dataFieldName } = this.props;
+            { getData, dataFieldName } = this.props;
         let { queryParam } = this.props,
             endPage = false,
             totalList = this.state.totalList,
@@ -45,7 +39,7 @@ export default class LoadListContainer extends Component{
         }
         const { pageSize } = queryParam;
         queryParam.pageNo = pageNo;
-        requestPromise(queryParam).then(function(result) { // 当成功的时候需要做的事情
+        getData(queryParam).then(function(result) {
             dataList = result.dataList;
             mergeTotalList = mergeList(pageNo, dataList, totalList);
             if ((dataList.length === 0 && pageNo != 1) || dataList.length < pageSize) {
@@ -71,8 +65,8 @@ export default class LoadListContainer extends Component{
         });
     }
 
-    componentWillUnMount() {
-        this.props.requestPromise.abort();
+    componentWillUnmount() {
+        this.props.getData.abort();
     }
 
     render(){
@@ -80,7 +74,7 @@ export default class LoadListContainer extends Component{
         return(
             <LoadList
                 {...this.props}
-                list = {totalList}
+                dataSource = {totalList}
                 onPageDown = {this.handlePageDown}
                 currentPage = {currentPage}
                 isLoading = {isLoading}
